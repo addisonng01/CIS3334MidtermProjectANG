@@ -29,10 +29,10 @@ public class FragmentDashboard extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        viewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        //final TextView textView = binding.textDashboard;
+        //viewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-        setupButton();
+        //setupButton();
 
         return root;
     }
@@ -43,7 +43,7 @@ public class FragmentDashboard extends Fragment {
         binding = null;
     }
 
-    private void setupButton() {
+    /*private void setupButton() {
         //buttonUpdateOrder = findViewById(R.id.buttonUpdateOrder);
         // This app uses the new bindings instead of the old findViewById
         buttonUpdateOrder= binding.buttonUpdateOrder;
@@ -54,5 +54,5 @@ public class FragmentDashboard extends Fragment {
                 viewModel.setText("Order Placed");
             }
         });
-    }
+    }*/
 }
