@@ -6,11 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import css.cis3334.project.databinding.FragmentDashboardBinding;
 
@@ -18,7 +19,10 @@ public class FragmentDashboard extends Fragment {
 
     private FragmentDashboardBinding binding;
     private MainViewModel viewModel;
-    Button buttonUpdateOrder;
+    RecyclerView recyclerViewOrder;
+    RecycleViewAdapter recycleViewAdapter;
+    OrderFirebaseData orderDataSource;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -29,11 +33,6 @@ public class FragmentDashboard extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        //final TextView textView = binding.textDashboard;
-        //viewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
-        //setupButton();
-
         return root;
     }
 
@@ -42,17 +41,13 @@ public class FragmentDashboard extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-    /*private void setupButton() {
-        //buttonUpdateOrder = findViewById(R.id.buttonUpdateOrder);
-        // This app uses the new bindings instead of the old findViewById
-        buttonUpdateOrder= binding.buttonUpdateOrder;
-        buttonUpdateOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("CIS 3334", "Place order button clicked");   // log button click for debugging using "CIS 3334" tag
-                viewModel.setText("Order Placed");
-            }
-        });
-    }*/
+        recyclerViewOrder = binding.recyclerViewOrder;
+        recycleViewAdapter = new RecycleViewAdapter(orderDataSource);
+        recyclerViewOrder.setAdapter(recycleViewAdapter);
+        recyclerViewOrder.setLayoutManager(new LinearLayoutManager(getContext()));
+        recycleViewAdapter.notifyDataSetChanged();
+    }
 }

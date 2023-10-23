@@ -1,7 +1,15 @@
 package css.cis3334.project;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -15,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     MainViewModel mainViewModel;
+    private ActivityResultLauncher<Intent> launcher;
+    TextView tvResult;
+    Order order;
 
 
     @Override
@@ -24,6 +35,18 @@ public class MainActivity extends AppCompatActivity {
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         setupNavBindings();
 
+        launcher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        if (data != null) {
+                            String Order = data.getStringExtra("Order");
+                            tvResult.setText(Order);
+                        }
+                    }
+                }
+        );
     }
 
     private void setupNavBindings() {
@@ -39,5 +62,4 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
-
 }

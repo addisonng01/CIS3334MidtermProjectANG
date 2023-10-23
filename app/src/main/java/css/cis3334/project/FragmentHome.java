@@ -1,9 +1,12 @@
 package css.cis3334.project;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +19,9 @@ public class FragmentHome extends Fragment {
 
     private FragmentHomeBinding binding;
     private MainViewModel viewModel;
+    ImageView ivHotdog;
+    ImageView ivBurger;
+    ImageView ivPizza;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -35,5 +41,36 @@ public class FragmentHome extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void setupButton()
+    {
+        ivHotdog = binding.ivHotdog;
+        ivBurger = binding.ivBurger;
+        ivPizza = binding.ivPizza;
+
+        ivHotdog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addActIntent = new Intent(v.getContext(), Store.class);
+                startActivity(addActIntent);
+            }
+        });
+
+        ivBurger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addActIntent = new Intent(v.getContext(), Store.class);
+                startActivity(addActIntent);
+            }
+        });
+        ivPizza.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addActIntent = new Intent(v.getContext(), Store.class);
+                startActivity(addActIntent);
+            }
+        });
+
     }
 }
