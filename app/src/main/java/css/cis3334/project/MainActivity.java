@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
     MainViewModel mainViewModel;
     private ActivityResultLauncher<Intent> launcher;
     TextView tvResult;
-    Order order;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

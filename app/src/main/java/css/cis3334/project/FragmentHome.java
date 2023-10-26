@@ -34,6 +34,8 @@ public class FragmentHome extends Fragment {
 
         //final TextView textView = binding.textHome;
         //viewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        setupImageViewClick();
+
         return root;
     }
 
@@ -43,8 +45,9 @@ public class FragmentHome extends Fragment {
         binding = null;
     }
 
-    private void setupButton()
+    private void setupImageViewClick()
     {
+        //sets up bindings with imageViews
         ivHotdog = binding.ivHotdog;
         ivBurger = binding.ivBurger;
         ivPizza = binding.ivPizza;
@@ -52,7 +55,11 @@ public class FragmentHome extends Fragment {
         ivHotdog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addActIntent = new Intent(v.getContext(), Store.class);
+                //creates intent with storefront_ui class
+                Intent addActIntent = new Intent(v.getContext(), storefront_ui.class);
+                //creates a key to be used in storefront_ui
+                String intentHotdog = "keyHotdog";
+                addActIntent.putExtra("strKey", intentHotdog);
                 startActivity(addActIntent);
             }
         });
@@ -60,14 +67,18 @@ public class FragmentHome extends Fragment {
         ivBurger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addActIntent = new Intent(v.getContext(), Store.class);
+                Intent addActIntent = new Intent(v.getContext(), storefront_ui.class);
+                String intentBurger = "keyBurger";
+                addActIntent.putExtra("strKey", intentBurger);
                 startActivity(addActIntent);
             }
         });
         ivPizza.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addActIntent = new Intent(v.getContext(), Store.class);
+                Intent addActIntent = new Intent(v.getContext(), storefront_ui.class);
+                String intentPizza = "keyPizza";
+                addActIntent.putExtra("strKey", intentPizza);
                 startActivity(addActIntent);
             }
         });

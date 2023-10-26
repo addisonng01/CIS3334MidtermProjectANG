@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 public class OrderViewHolder extends RecyclerView.ViewHolder{
     TextView tvFoodName;
     TextView tvPrice;
-
     public OrderViewHolder(@NonNull View itemView) {
         super(itemView);
         tvFoodName = itemView.findViewById(R.id.tvFoodName);

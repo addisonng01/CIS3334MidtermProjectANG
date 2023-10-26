@@ -13,6 +13,7 @@ public class OrderFirebaseData {
     public static final String OrderDataTag = "ORDER DATA";
     List<Order> orderList;
 
+    //opens the database instance from firebase
     public DatabaseReference open()  {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myOrderDbRef = database.getReference(OrderDataTag);
@@ -23,6 +24,7 @@ public class OrderFirebaseData {
     public void close() {
     }
 
+    //creates an order object that contains the name of the food and the price
     public Order createOrder(String foodName, Double price) {
         String key = myOrderDbRef.child(OrderDataTag).push().getKey();
         Order newOrder = new Order(key, foodName, price);
@@ -30,12 +32,13 @@ public class OrderFirebaseData {
         return newOrder;
     }
 
+    //deletes an order object
     public void deleteOrder(Order order) {
         String key = order.getKey();
         myOrderDbRef.child(key).removeValue();
     }
 
-
+    //updates order list if there is a change (ex. an order is deleted)
     public List<Order> updateOrderList(DataSnapshot dataSnapshot) {
         orderList.clear();
         for (DataSnapshot data : dataSnapshot.getChildren()) {
@@ -45,16 +48,16 @@ public class OrderFirebaseData {
         return orderList;
     }
 
+    //returns the order list
     public List<Order> getAllOrders() {
         return orderList;
     }
-
+    //returns one order at the position called
     public Order getOrder(Integer position) {
         return orderList.get(position);
     }
-
+    //returns the size of the order list
     public Integer getNumberOfOrders() {
         return orderList.size();
     }
-
 }
